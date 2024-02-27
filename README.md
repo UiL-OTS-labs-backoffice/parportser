@@ -11,6 +11,8 @@ After building use `load.sh` to load the module. By default it would try to open
 # ./load.sh /dev/ttyUSB0
 ```
 
+(Note that load.sh shamelessly claims `/dev/parport0` for itself, so it will probably fail if the computer already has a real parallel port)
+
 `test.zp` is a minimal zep script based on the latency-test repo, it should run fine:
 
 ![](demo.jpg)
