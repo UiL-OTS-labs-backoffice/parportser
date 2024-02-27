@@ -1,0 +1,30 @@
+plugin zep_iospp;
+
+SPP parallel
+{
+    init()
+    {
+	data_is_output = true;
+
+	open(0);
+	if (error()) terminate;
+
+	status_event_mask = SPP_STATUS_MASK;
+	data_event_mask = SPP_DATA_MASK;
+    }
+
+    cleanup()
+    {
+	close();
+    }
+}
+
+start()
+{
+    parallel.write_data(0x65);
+    parallel.write_data(0x65);
+    parallel.write_data(0x65);
+    parallel.write_data(0x0A);
+    parallel.write_data(0x0D);
+    terminate;
+}
