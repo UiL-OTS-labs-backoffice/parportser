@@ -1,1 +1,3 @@
-SUBSYSTEMS=="usb", DRIVERS=="pl2303", RUN+="/usr/src/parportser/load.sh /dev/ttyUSB0"
+SUBSYSTEMS=="usb", ACTION=="add", DRIVERS=="pl2303", ENV{DEVNAME}!="", RUN+="/usr/src/parportser/load.sh $env{DEVNAME}"
+SUBSYSTEM=="tty", ENV{ID_VENDOR_ID}=="067b", ENV{ID_MODEL_ID}=="2303", RUN+="/usr/sbin/rmmod parportser"
+
