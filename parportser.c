@@ -1,5 +1,6 @@
 #include <linux/module.h>
 #include <linux/init.h>
+#include <linux/version.h>
 #include <linux/kernel.h>
 #include <linux/fs.h>
 #include <linux/ppdev.h>
@@ -57,7 +58,11 @@ long parportser_ioctl(struct file* fp, unsigned int cmd, unsigned long arg) {
 
 	if (fp_out != NULL) {
 	    // always expected to be a single byte
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4,14, 0)
 	    vfs_write(fp_out, argp, 1, &fp_out->f_pos);
+#else
+        kernel_write(fp_out, argp, 1, &fp_out->f_pos);
+#endif
 	}
 	else {
 	    printk(KERN_ALERT "parportser: not writing data because tty is not open\n");
