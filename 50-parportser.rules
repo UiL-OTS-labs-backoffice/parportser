@@ -1,0 +1,1 @@
+SUBSYSTEMS=="usb", DRIVERS=="pl2303", RUN+="/usr/src/parportser/load.sh /dev/ttyUSB0"
