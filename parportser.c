@@ -59,11 +59,17 @@ long parportser_ioctl(struct file* fp, unsigned int cmd, unsigned long arg) {
 
 	if (fp_out != NULL) {
 	    // always expected to be a single byte
+		ssize_t num_written;
 #if LINUX_VERSION_CODE < KERNEL_VERSION(4,14, 0)
-	    vfs_write(fp_out, argp, 1, &fp_out->f_pos);
+	    num_written = vfs_write(fp_out, &reg, 1, &fp_out->f_pos);
 #else
-        kernel_write(fp_out, argp, 1, &fp_out->f_pos);
+		num_written = kernel_write(fp_out, &reg, 1, &fp_out->f_pos);
 #endif
+		pr_info("parportser: Written %ld bytes, %#2x - %d - %c\n",
+				num_written,
+				reg,
+				reg,
+				reg);
 	}
 	else {
 	    printk(KERN_ALERT "parportser: not writing data because tty is not open\n");
