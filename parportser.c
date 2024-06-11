@@ -2,6 +2,7 @@
 #include <linux/init.h>
 #include <linux/version.h>
 #include <linux/kernel.h>
+#include <linux/uaccess.h>
 #include <linux/fs.h>
 #include <linux/ppdev.h>
 #include <linux/file.h>

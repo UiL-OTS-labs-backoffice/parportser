@@ -1,4 +1,6 @@
 #!/bin/sh
+cd "$(dirname "$0")"
+
 module="parportser"
 device="parportser"
 mode="664"
